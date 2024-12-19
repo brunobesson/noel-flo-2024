@@ -41,6 +41,10 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/2.1.0/gpx.min.js"
+      defer
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/@turf/turf@7/turf.min.js"></script>
   </head>
   <style>
@@ -163,6 +167,60 @@
         Lien
       </a>
     </div>
+    <div id="monteynard" class="popup">
+      <h1>Trail des Passerelles du Monteynard</h1>
+      <h2>Trail du Petit Train</h2>
+      <p>28 km &ndash; 1350 D+</p>
+      <p>Dimanche 6 juillet 2025</p>
+      <a
+        href="https://trail-passerelles-monteynard.fr/les-epreuves/le-petit-train/"
+        target="_blank"
+        noopener
+        noreferrer
+      >
+        Lien
+      </a>
+    </div>
+    <div id="drayes" class="popup">
+      <h1>Les Drayes du Vercors</h1>
+      <h2>La Vertaco</h2>
+      <p>34 km &ndash; 1590 D+</p>
+      <p>Samedi 21 juin 2025</p>
+      <a
+        href="https://lesdrayesduvercors.fr/"
+        target="_blank"
+        noopener
+        noreferrer
+      >
+        Lien
+      </a>
+    </div>
+    <div id="beaume" class="popup">
+      <h1>Trail Beaume-Drobie</h1>
+      <p>32 km &ndash; 1410 D+</p>
+      <p>Dimanche 22 juin 2025</p>
+      <a
+        href="https://patricerotteleur.wixsite.com/trail-beaume-drobie"
+        target="_blank"
+        noopener
+        noreferrer
+      >
+        Lien
+      </a>
+    </div>
+    <div id="jovet" class="popup">
+      <h1>Trail des Crêtes du Mont Jovet</h1>
+      <p>32 km &ndash; 2150 D+</p>
+      <p>Mi juin 2025</p>
+      <a
+        href="https://trailbozel.com/trail-du-mont-jovet/"
+        target="_blank"
+        noopener
+        noreferrer
+      >
+        Lien
+      </a>
+    </div>
     <div popover id="popover">
       <div class="popover-wrapper">
         <div class="popover-content">
@@ -197,7 +255,7 @@
       </div>
     </div>
   </body>
-  <script>
+  <script type="module">
     const map = L.map('map').setView([47, 4], 5);
     L.tileLayer('https://a.tile.opentopomap.org/{z}/{x}/{y}.png', {
       minZoom: 3,
@@ -11528,6 +11586,47 @@
       const polygon = L.polyline(latLng, { color: 'red' }).addTo(map);
       const marker = L.marker(polygon.getBounds().getCenter()).addTo(map);
       marker.bindPopup(document.getElementById('gypaete'));
+    }
+
+    {
+      new L.GPX(
+        'https://storage.googleapis.com/kavval-files/events/vnkBg/tracks/2023-ef44bb06/28000/tracedetrail_2070991679567399119.gpx',
+        {
+          async: true,
+          polyline_options: { color: 'red' },
+          markers: { startIcon: 0, endIcon: 0 },
+        }
+      )
+        .on('loaded', (e) => {
+          const marker = L.marker(e.target.getBounds().getCenter()).addTo(map);
+          marker.bindPopup(document.getElementById('monteynard'));
+        })
+        .addTo(map);
+    }
+
+    {
+      // drayes
+      const marker = L.marker([44.968247, 5.416081]).addTo(map);
+      marker.bindPopup(document.getElementById('drayes'));
+    }
+
+    {
+      // beaume drobie
+      const marker = L.marker([44.589534, 4.123651]).addTo(map);
+      marker.bindPopup(document.getElementById('beaume'));
+    }
+
+    {
+      new L.GPX('trail-des-cretes-du-mont-jovet-2025.gpx', {
+        async: true,
+        polyline_options: { color: 'red' },
+        markers: { startIcon: 0, endIcon: 0 },
+      })
+        .on('loaded', (e) => {
+          const marker = L.marker(e.target.getBounds().getCenter()).addTo(map);
+          marker.bindPopup(document.getElementById('jovet'));
+        })
+        .addTo(map);
     }
   </script>
 </html>
