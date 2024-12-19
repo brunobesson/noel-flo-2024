@@ -11661,7 +11661,7 @@
       new L.GPX('ultrachampsaur-17e-edition-2025-trail-des-venasques.gpx', {
         async: true,
         polyline_options: { color: 'red' },
-        markers: { startIcon: 0, endIcon: 0 },
+        markers: { startIcon: 0, endIcon: 0, wptIcons: {} },
       })
         .on('loaded', (e) => {
           const marker = L.marker(e.target.getBounds().getCenter()).addTo(map);
