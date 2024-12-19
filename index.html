@@ -221,6 +221,34 @@
         Lien
       </a>
     </div>
+    <div id="champsaur" class="popup">
+      <h1>Ultrachampsaur</h1>
+      <h2>Trail des Venasques</h2>
+      <p>32 km &ndash; 2140 D+</p>
+      <p>Samedi 5 juillet 2025</p>
+      <a
+        href="https://www.ultrachampsaur.com/boutique/trail-des-venasques-226/"
+        target="_blank"
+        noopener
+        noreferrer
+      >
+        Lien
+      </a>
+    </div>
+    <div id="mad" class="popup">
+      <h1>Mad'Trail</h1>
+      <h2>Roche Blanche</h2>
+      <p>29 km &ndash; 1720 D+</p>
+      <p>Dimanche 13 juillet 2025</p>
+      <a
+        href="https://www.madtrailvalmorel.com/roche-blanche-28-kms/"
+        target="_blank"
+        noopener
+        noreferrer
+      >
+        Lien
+      </a>
+    </div>
     <div popover id="popover">
       <div class="popover-wrapper">
         <div class="popover-content">
@@ -11625,6 +11653,35 @@
         .on('loaded', (e) => {
           const marker = L.marker(e.target.getBounds().getCenter()).addTo(map);
           marker.bindPopup(document.getElementById('jovet'));
+        })
+        .addTo(map);
+    }
+
+    {
+      new L.GPX('ultrachampsaur-17e-edition-2025-trail-des-venasques.gpx', {
+        async: true,
+        polyline_options: { color: 'red' },
+        markers: { startIcon: 0, endIcon: 0 },
+      })
+        .on('loaded', (e) => {
+          const marker = L.marker(e.target.getBounds().getCenter()).addTo(map);
+          marker.bindPopup(document.getElementById('champsaur'));
+        })
+        .addTo(map);
+    }
+
+    {
+      new L.GPX(
+        'https://storage.googleapis.com/kavval-files/events/Vdvqm/tracks/2023-839f20e8/trail-de-la-roche-blanche-28000/trail_de_roche_blanche-12406905-1663922478-7961663922498562.gpx',
+        {
+          async: true,
+          polyline_options: { color: 'red' },
+          markers: { startIcon: 0, endIcon: 0 },
+        }
+      )
+        .on('loaded', (e) => {
+          const marker = L.marker(e.target.getBounds().getCenter()).addTo(map);
+          marker.bindPopup(document.getElementById('mad'));
         })
         .addTo(map);
     }
